@@ -39,8 +39,8 @@ for numero in lista:
 # Uso de enumerate para iterar con índices
 frutas = ["manzana", "plátano", "cereza"]
 
-#for indice, fruta in enumerate(frutas):
-    #print(f"Índice {indice}: {fruta}")
+for indice, fruta in enumerate(frutas):
+    print(f"Índice {indice}: {fruta}")
 
 
 x, y, z = 1, 2, 3
@@ -48,3 +48,19 @@ x, y, z = 1, 2, 3
 x, z, y = x, y, z  # Intercambio de valores
 print(x, y, z)  # Salida: 1 3 2
 
+
+
+
+
+
+
+#############################################
+
+# Funciones con def()
+
+# for simplificado
+values = [7,11,13,17,19]
+
+print([i * i for i in values]) # multiplicar cada elemento de la lista por si mismo
+
+print([x * x for x in range(10,15)]) # cuadrados del 10 al 14
