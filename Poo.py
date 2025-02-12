@@ -1,40 +1,54 @@
-class Power(object):
-    # Atributo de clase que define el exponente por defecto
-    default_exponent = 2
-    
-    # El constructor (__init__) inicializa el objeto con un exponente dado,
-    # si no se pasa uno, se usa el valor por defecto (2)
-    def __init__(self, exponent=default_exponent):
-        self.exponent = exponent  # Asigna el valor del exponente al objeto
-    
-    # Método que calcula x elevado al exponente de la clase
-    def of(self, x):
-        return x ** self.exponent  # Retorna x a la potencia del exponente
+class ListaEstructurada:
+    def __init__(self):
+        self.lista = []
+        self.n_elementos = 0  # Contador de elementos en la lista
 
-# Definición de una subclase que hereda de Power
-class RealPower(Power):
-    # Sobrescribe el método 'of' para realizar una comprobación adicional
-    def of(self, x):
-        # Si el exponente es un entero o x es mayor o igual a 0, realiza la operación
-        if isinstance(self.exponent, int) or x >= 0:
-            return x ** self.exponent
-        
-        # Si x es negativo y el exponente es fraccionario (no entero),
-        # lanza un error porque las raíces fraccionarias de números negativos
-        # no son números reales
-        raise ValueError("Fractional powers of negative numbers are imaginary")
+    def insertar(self, elemento):
+        self.lista += [elemento]
+        self.n_elementos += 1
 
+    def eliminar(self, elemento):
+        for i in range(self.n_elementos):
+            if self.lista[i] == elemento:
+                for j in range(i, self.n_elementos - 1):
+                    self.lista[j] = self.lista[j + 1]
+                
+                self.lista = self.lista[:-1]  # Reducir tamaño eliminando el último
+                self.n_elementos -= 1
+                return True
+        return False
 
-print("Power.default_exponent:", Power.default_exponent)
-square= Power()
-root= Power(0.5)
-print("square.of(3) =", square.of(3))
-print("root.of(3) =", root.of(3))
+    def buscar(self, elemento):
+        for i in self.lista:
+            if i == elemento:
+                return True  # Retorna True si encuentra el elemento
+        return False  # Retorna False si no encuentra el elemento
 
-###
+    def recorrer(self, function= print):
+        for j in range(self.n_elementos):  # Corregir nItems a n_elementos
+            function(self.lista[j])  # Corregir self[j] a self.lista[j]
 
+    def ordenar(self):
+        for i in range(self.n_elementos):
+            for j in range(self.n_elementos - 1):
+                if self.lista[j] > self.lista[j + 1]:
+                    self.lista[j], self.lista[j + 1] = self.lista[j + 1], self.lista[j]
 
-real_root = RealPower(0.5)
-print("real_root.of(3) =", real_root.of(3))
+max_size = 3
+arr = ListaEstructurada()  # Cambiar Array por ListaEstructurada
+arr.insertar(77)
+arr.insertar("abc")
+arr.insertar(3)
+arr.recorrer()
 
-print("real_root.of(-3)", real_root.of(-3))
+# Llamar al método buscar
+print(arr.buscar(77))  # Retorna: True
+print(arr.buscar("xyz"))  # Retorna: False
+
+max_size = 3
+arr = ListaEstructurada()  # Cambiar Array por ListaEstructurada
+arr.insertar(77)
+arr.insertar("abc")
+arr.insertar(3)
+arr.recorrer()
+arr.buscar(3)
