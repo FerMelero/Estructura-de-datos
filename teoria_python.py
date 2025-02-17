@@ -64,5 +64,3 @@ values = [7,11,13,17,19]
 print([i * i for i in values]) # multiplicar cada elemento de la lista por si mismo
 
 print([x * x for x in range(10,15)]) # cuadrados del 10 al 14
-
-print([1,2,3]*2)

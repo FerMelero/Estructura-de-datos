@@ -45,7 +45,19 @@ class Array:
 
     def __len__(self):
         return self.__nItems
-
+    
+    def get(self, n):
+        if n >= 0 and n < self.__nItems:
+            return self.__a[n]
+        else:
+            raise ValueError("Índice fuera de rango")
+    
+    def set(self, n, value):
+        if n >= 0 and n < self.__nItems:
+            self.__a[n] = value
+        else:
+            raise ValueError("Índice fuera de rango")
+        
     def insert(self, item):
         self.__a[self.__nItems] = item
         self.__nItems += 1
@@ -55,6 +67,13 @@ class Array:
             if self.__a[j] == item:
                 return self.__a[j]
         return None
+    
+    def find(self, item):
+        for j in range(self.__nItems):
+            if self.__a[j] == item:
+                return j
+        return -1
+    
 
     def delete(self, item):
         for j in range(self.__nItems):
@@ -69,18 +88,7 @@ class Array:
         for j in range(self.__nItems):
             function(self.__a[j])
 
-    # Método getter para acceder a __nItems
-    def get_nItems(self):
-        return self.__nItems
-
-    # Método setter para modificar __nItems (opcional, dependiendo de si quieres permitir modificaciones)
-    def set_nItems(self, value):
-        if value >= 0 and value <= len(self.__a):
-            self.__nItems = value
-        else:
-            raise ValueError("El valor de nItems debe estar dentro del rango válido.")
-
-arr = Array(100)
+arr = Array(10)
 
 arr.insert(77)
 arr.insert(99)
@@ -93,3 +101,7 @@ arr.insert(0)
 arr.insert("baz")
 arr.insert(-17)
 arr.traverse()
+
+print("Search 12", arr.search(12))
+print("Delete 0 returns", arr.delete(0))
+print(arr.__len__())
