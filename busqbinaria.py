@@ -112,3 +112,63 @@ print(arr)
 print(arr.find(2))
 print(arr.find(3))
 
+def identity(tupla):
+    return tupla[1]
+
+class OrderedRecordArray:
+    def __init__(self, initialSize, key = identity):
+        self.__a = [None] * initialSize
+        self.__nItems = 0
+        self.__key = key
+
+    def find(self, key):
+        low = 0
+        high = len(self.__a) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if self.__key(self.__a[mid]) == key:
+                return mid
+            elif self.__key(self.__a[mid]) < key:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return low
+
+    def insert(self, record):
+        if len(self.__a) >= self.__maxsize:
+            raise Exception("El arreglo está lleno, no se pueden insertar más elementos.")
+        index = self.find(self.__key(record))
+        self.__a.insert(index, record)
+
+    def delete(self, key):
+        index = self.find(key)
+        if index < len(self.__a) and self.__key(self.__a[index]) == key:
+            self.__a.pop(index)
+
+    def __getitem__(self, index):
+        return self.__a[index]
+
+    def __len__(self):
+        return len(self.__a)
+
+    def __str__(self):
+        return str(self.__a)
+
+
+
+# Definir la función clave para extraer el número de la tupla
+def key_function(tupla):
+    return tupla[1]  # Extrae el segundo elemento de la tupla (el número)
+'''
+# Crear el arreglo ordenado con un tamaño máximo de 10
+maxsize = 10
+array = OrderedRecordArray(maxsize, key_function)
+
+# Insertar tuplas ("letra", num)
+array.insert(("A", 3))
+array.insert(("B", 1))
+array.insert(("C", 2))
+
+# El arreglo estará ordenado por el número (num)
+print(array)  # Salida: [('B', 1), ('C', 2), ('A', 3)]
+'''
